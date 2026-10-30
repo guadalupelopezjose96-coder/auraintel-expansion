@@ -1,0 +1,4 @@
+/target
+Cargo.lock
+audit_logs/*.log
+**/*.rs.bk

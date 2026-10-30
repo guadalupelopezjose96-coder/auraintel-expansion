@@ -714,3 +714,155 @@ fn main() {
     };
     print_scenario("CASO 4: Recaptura Clawback por Ruptura de Safe Harbor (Sec. 5000G(c))", &case_clawback);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn sample_event() -> AutomationExpansionEvent {
+        AutomationExpansionEvent {
+            domain_id: DOMAIN_AURATETRAX,
+            asset_id: [9u8; 16],
+            is_cloud_provider_infrastructure: false,
+            displacement_type: DisplacementType::DirectReplacement,
+            taxonomy: default_taxonomy(),
+            displacement_duration_days: 120,
+            baseline_payroll_cents: 12_000_000, // $120,000.00 USD
+            safe_harbor_reassignment_months: 0,
+            safe_harbor_breached_clawback: false,
+            consolidated_group_revenue_cents: 850_000_000, // $8,500,000.00 USD
+        }
+    }
+
+    #[test]
+    fn test_01_clause_3_author_and_org_integrity() {
+        assert_eq!(AAUFSA_AUTHOR, "Jose Emanuel Guadalupe Lopez");
+        assert_eq!(AAUFSA_ORG_ID, 320_717_657_398);
+        assert_eq!(VALID_DOMAINS.len(), 6);
+    }
+
+    #[test]
+    fn test_02_domain_isolation_validation() {
+        for &domain in &VALID_DOMAINS {
+            assert_eq!(CapacityAndFiscalEngine::validate_domain(domain), Ok(()));
+        }
+        assert_eq!(
+            CapacityAndFiscalEngine::validate_domain(999_999_999),
+            Err(EngineError::InvalidDomain(999_999_999))
+        );
+    }
+
+    #[test]
+    fn test_03_irc_414_1563_controlled_group_aggregation() {
+        let receipts = [
+            DomainGrossReceipts { domain_id: DOMAIN_AURATETRAX, annual_gross_receipts_cents: 300_000_000 },
+            DomainGrossReceipts { domain_id: DOMAIN_PROPHONIX, annual_gross_receipts_cents: 250_000_000 },
+        ];
+        let res = CapacityAndFiscalEngine::aggregate_controlled_group_receipts(&receipts);
+        assert_eq!(res, Ok(550_000_000));
+    }
+
+    #[test]
+    fn test_04_cloud_saas_developer_immunity_sec_5000hd() {
+        let mut ev = sample_event();
+        ev.is_cloud_provider_infrastructure = true;
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(!a.is_taxable);
+            assert_eq!(a.total_tax_amount_cents, 0);
+            assert_eq!(a.statutory_category, StatutoryCategory::ExemptSafeHarborOrImmunity);
+        }
+    }
+
+    #[test]
+    fn test_05_small_business_5m_threshold_sec_5000gb() {
+        let mut ev = sample_event();
+        ev.consolidated_group_revenue_cents = 500_000_000; // Exactamente $5,000,000.00 USD
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(!a.is_taxable);
+            assert_eq!(a.total_tax_amount_cents, 0);
+        }
+    }
+
+    #[test]
+    fn test_06_duration_90_days_threshold_sec_5000hc() {
+        let mut ev = sample_event();
+        ev.displacement_duration_days = 90; // <= 90 días no sujeto
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(!a.is_taxable);
+            assert_eq!(a.total_tax_amount_cents, 0);
+            assert_eq!(a.statutory_category, StatutoryCategory::NonSubjectSec5000Hc);
+        }
+    }
+
+    #[test]
+    fn test_07_safe_harbor_36_months_sec_5000ga() {
+        let mut ev = sample_event();
+        ev.safe_harbor_reassignment_months = 36;
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(!a.is_taxable);
+            assert!(a.safe_harbor_applied);
+            assert_eq!(a.total_tax_amount_cents, 0);
+        }
+    }
+
+    #[test]
+    fn test_08_exact_15_3_pct_tax_and_fiduciary_split() {
+        let ev = sample_event();
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(a.is_taxable);
+            assert_eq!(a.total_tax_amount_cents, 1_836_000); // $18,360.00 USD
+            assert_eq!(a.social_security_allocation_cents, 1_377_000); // $13,770.00 USD (75%)
+            assert_eq!(a.workforce_reskilling_allocation_cents, 459_000); // $4,590.00 USD (25%)
+        }
+    }
+
+    #[test]
+    fn test_09_clawback_recapture_surcharge_sec_5000gc() {
+        let mut ev = sample_event();
+        ev.safe_harbor_reassignment_months = 18;
+        ev.safe_harbor_breached_clawback = true;
+        let res = CapacityAndFiscalEngine::evaluate_aaufsa_expansion(&ev);
+        assert!(res.is_ok());
+        if let Ok(a) = res {
+            assert!(a.is_taxable);
+            assert!(a.clawback_triggered);
+            assert_eq!(a.base_tax_cents, 1_836_000); // $18,360.00 USD
+            assert_eq!(a.clawback_surcharge_cents, 36_720); // $367.20 USD (2%)
+            assert_eq!(a.total_tax_amount_cents, 1_872_720); // $18,727.20 USD
+            assert_eq!(a.social_security_allocation_cents, 1_404_540); // $14,045.40 USD
+            assert_eq!(a.workforce_reskilling_allocation_cents, 468_180); // $4,681.80 USD
+        }
+    }
+
+    #[test]
+    fn test_10_vpp_der_saturation_and_frequency_guards() {
+        let mut bus = VppBusState {
+            bus_id: 1,
+            current_mw: 90_000,
+            max_mw: 100_000,
+            current_ma: 100_000,
+            max_ma: 500_000,
+            grid_frequency_chz: 6000,
+        };
+        let der_over = DerNodeAddition {
+            node_id: [1u8; 16],
+            domain_id: DOMAIN_AURAINTEL_GLOBAL,
+            injection_capacity_mw: 15_000, // Excede 100,000 mW
+            rated_current_ma: 10_000,
+        };
+        assert_eq!(
+            CapacityAndFiscalEngine::evaluate_der_expansion(&mut bus, &der_over),
+            Err(EngineError::VppOverCapacity { requested_mw: 105_000, max_mw: 100_000 })
+        );
+    }
+}

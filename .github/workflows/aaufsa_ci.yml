@@ -1,0 +1,30 @@
+name: AAUFSA Statutory & VPP Compliance CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  verify-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: Execute 6-Vector Policy-as-Code Audit
+        run: |
+          chmod +x ./verify_expansion_compliance.sh
+          ./verify_expansion_compliance.sh
+
+      - name: Execute Clippy Pedantic Zero-Unsafe Audit
+        run: cargo clippy --all-targets -- -D warnings -D clippy::pedantic -D clippy::unwrap_used
+
+      - name: Execute 10-Vector AAUFSA & VPP Unit Test Suite
+        run: cargo test --release

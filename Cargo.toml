@@ -1,0 +1,19 @@
+[package]
+name = "auraintel-expansion-engine"
+version = "1.0.0"
+edition = "2021"
+authors = ["guadalupelopezjose96-org <core@auraintel-global.com>"]
+license = "Apache-2.0"
+
+[dependencies]
+serde = { version = "1.0.217", default-features = false, features = ["alloc", "derive"] }
+serde_json = { version = "1.0.138", default-features = false, features = ["alloc"] }
+sha2 = { version = "0.10.8", default-features = false }
+hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

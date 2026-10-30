@@ -1,14 +1,6 @@
--- ============================================================================
--- LIBRO MAYOR DISTRIBUIDO Y REGISTRO DE CAPACIDAD MULTI-DOMINIO
--- Organización: guadalupelopezjose96-org (ID: 320717657398)
--- ============================================================================
-
 BEGIN TRANSACTION;
-
--- Configurar aislamiento de transacción estricto
 SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
--- Tabla de Dominios Corporativos Validados
 CREATE TABLE IF NOT EXISTS corporate_domains (
     domain_id BIGINT PRIMARY KEY,
     domain_fqdn VARCHAR(255) NOT NULL UNIQUE,
@@ -27,7 +19,6 @@ VALUES
     (358233233, 'Prophonix.com', 'Prophonix Infrastructure')
 ON CONFLICT (domain_id) DO NOTHING;
 
--- Registro de Capacidad Elástica de Nodos DER (AuraIntel VPP)
 CREATE TABLE IF NOT EXISTS vpp_der_nodes (
     node_uuid UUID PRIMARY KEY,
     domain_id BIGINT NOT NULL REFERENCES corporate_domains(domain_id),
@@ -39,7 +30,6 @@ CREATE TABLE IF NOT EXISTS vpp_der_nodes (
     cryptographic_digest CHAR(64) NOT NULL
 );
 
--- Libro Mayor Contable de Doble Partida (AAUFSA IRC Chapter 56)
 CREATE TABLE IF NOT EXISTS aaufsa_double_entry_ledger (
     entry_id VARCHAR(64) PRIMARY KEY,
     domain_id BIGINT NOT NULL REFERENCES corporate_domains(domain_id),
@@ -51,27 +41,41 @@ CREATE TABLE IF NOT EXISTS aaufsa_double_entry_ledger (
     recorded_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- Inmutabilidad Absoluta: Anulación de UPDATE y DELETE en Libro Mayor
-CREATE RULE prevent_ledger_update AS ON UPDATE TO aaufsa_double_entry_ledger
-    DO INSTEAD NOTHING;
+CREATE RULE prevent_ledger_update AS ON UPDATE TO aaufsa_double_entry_ledger DO INSTEAD NOTHING;
+CREATE RULE prevent_ledger_delete AS ON DELETE TO aaufsa_double_entry_ledger DO INSTEAD NOTHING;
+CREATE RULE prevent_vpp_nodes_delete AS ON DELETE TO vpp_der_nodes DO INSTEAD NOTHING;
 
-CREATE RULE prevent_ledger_delete AS ON DELETE TO aaufsa_double_entry_ledger
-    DO INSTEAD NOTHING;
-
-CREATE RULE prevent_vpp_nodes_delete AS ON DELETE TO vpp_der_nodes
-    DO INSTEAD NOTHING;
-
--- Habilitación de Row-Level Security (RLS) para segregación multi-inquilino
 ALTER TABLE vpp_der_nodes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE aaufsa_double_entry_ledger ENABLE ROW LEVEL SECURITY;
 
--- Políticas RLS basadas en contexto de sesión
 CREATE POLICY domain_isolation_vpp_policy ON vpp_der_nodes
-    FOR ALL
-    USING (domain_id = NULLIF(current_setting('app.current_domain_id', true), '')::BIGINT);
+    FOR ALL USING (domain_id = NULLIF(current_setting('app.current_domain_id', true), '')::BIGINT);
 
 CREATE POLICY domain_isolation_ledger_policy ON aaufsa_double_entry_ledger
-    FOR ALL
-    USING (domain_id = NULLIF(current_setting('app.current_domain_id', true), '')::BIGINT);
+    FOR ALL USING (domain_id = NULLIF(current_setting('app.current_domain_id', true), '')::BIGINT);
 
 COMMIT;
+
+-- ============================================================================
+-- TABLA OPERATIVA DE TELEMETRIA Y DESPACHO EN TIEMPO REAL AURAINTEL VPP
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS aaufsa_vpp_operational_ledger (
+    cycle_id BIGINT PRIMARY KEY,
+    org_id BIGINT NOT NULL CHECK (org_id = 320717657398),
+    domain_id BIGINT NOT NULL CHECK (domain_id IN (
+        877771073297, 964521086569, 188680247367,
+        1087754464927, 282230018778, 358233233
+    )),
+    bus_mw BIGINT NOT NULL CHECK (bus_mw >= 0),
+    grid_freq_chz INTEGER NOT NULL CHECK (grid_freq_chz BETWEEN 5950 AND 6050),
+    dispatch_cmd TEXT NOT NULL,
+    displaced_payroll_cents BIGINT NOT NULL CHECK (displaced_payroll_cents >= 0),
+    total_tax_cents BIGINT NOT NULL CHECK (total_tax_cents >= 0),
+    oasi_trust_cents BIGINT NOT NULL CHECK (oasi_trust_cents >= 0),
+    reskilling_trust_cents BIGINT NOT NULL CHECK (reskilling_trust_cents >= 0),
+    prev_hash CHAR(64) NOT NULL,
+    record_hash CHAR(64) NOT NULL UNIQUE,
+    recorded_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE aaufsa_vpp_operational_ledger ENABLE ROW LEVEL SECURITY;

@@ -57,7 +57,7 @@ MISSING_DOMAINS=0
 RUST_SRC_CLEAN=$(tr -d '_' < src/main.rs)
 
 for domain in "${EXPECTED_DOMAINS[@]}"; do
-    if ! echo "${RUST_SRC_CLEAN}" | grep -q "${domain}"; then
+    if ! grep -q "${domain}" <<< "${RUST_SRC_CLEAN}"; then
         echo -e "${RED}[ERROR] Dominio ${domain} no modelado en src/main.rs${NC}"
         MISSING_DOMAINS=$((MISSING_DOMAINS + 1))
     fi

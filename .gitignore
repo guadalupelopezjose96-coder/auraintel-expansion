@@ -2,3 +2,8 @@
 Cargo.lock
 audit_logs/*.log
 **/*.rs.bk
+
+audit_logs/vpp_bus_state.json
+audit_logs/vpp_sql_ledger_queue.sql
+audit_logs/*.log
+audit_logs/*.pid

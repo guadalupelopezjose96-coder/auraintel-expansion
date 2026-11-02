@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.7.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:317e8322-45a9-40a7-8572-63e091cf0c3d",
+  "serialNumber": "urn:uuid:40f76759-85d3-4697-b61e-2ddbc29ab1f9",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-11-01T01:50:01+00:00",
+    "timestamp": "2026-11-02T01:24:57+00:00",
     "tools": {
       "components": [
         {
@@ -20,7 +20,7 @@
       ]
     },
     "component": {
-      "bom-ref": "2e003299-5610-4749-aa2d-1f21ea7c7f8e",
+      "bom-ref": "b708a8a1-8a6c-4530-818d-85aa914be382",
       "type": "application",
       "name": ".",
       "properties": [
@@ -33,7 +33,7 @@
   },
   "components": [
     {
-      "bom-ref": "88aa2474-965c-452b-962d-ac586827e44b",
+      "bom-ref": "8dfd60c8-8ddf-4bb1-b65e-4fe8242c81e3",
       "type": "application",
       "name": "Cargo.lock",
       "properties": [
@@ -441,15 +441,15 @@
   ],
   "dependencies": [
     {
-      "ref": "2e003299-5610-4749-aa2d-1f21ea7c7f8e",
+      "ref": "8dfd60c8-8ddf-4bb1-b65e-4fe8242c81e3",
       "dependsOn": [
-        "88aa2474-965c-452b-962d-ac586827e44b"
+        "pkg:cargo/auraintel-expansion-engine@1.0.0"
       ]
     },
     {
-      "ref": "88aa2474-965c-452b-962d-ac586827e44b",
+      "ref": "b708a8a1-8a6c-4530-818d-85aa914be382",
       "dependsOn": [
-        "pkg:cargo/auraintel-expansion-engine@1.0.0"
+        "8dfd60c8-8ddf-4bb1-b65e-4fe8242c81e3"
       ]
     },
     {

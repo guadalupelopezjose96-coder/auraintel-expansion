@@ -1,183 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Standard1979.com — Auditoría Forense WORM, Grafana Fiscal & Clawback</title>
-  <style>
-    :root { --bg: #090d16; --panel: #111827; --border: #374151; --gold: #f59e0b; --green: #10b981; --accent: #38bdf8; }
-    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: #f3f4f6; margin: 0; padding: 2rem 1rem; line-height: 1.6; }
-    .container { max-width: 1040px; margin: 0 auto; }
-    .badge { display: inline-block; background: var(--gold); color: #000; padding: 0.35rem 0.9rem; border-radius: 999px; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.05em; }
-    h1 { font-size: 2.2rem; margin: 0.9rem 0 0.4rem; color: #fff; }
-    .subtitle { color: #9ca3af; font-size: 1rem; margin-bottom: 1.8rem; }
-    .grafana-header { display: flex; justify-content: space-between; align-items: center; background: #161f30; border: 1px solid var(--border); padding: 0.8rem 1.2rem; border-radius: 10px 10px 0 0; }
-    .grafana-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; background: var(--panel); border: 1px solid var(--border); border-top: none; padding: 1.2rem; border-radius: 0 0 10px 10px; }
-    .g-panel { background: #0b0f19; border: 1px solid #1f2937; border-radius: 8px; padding: 1rem; }
-    .g-label { font-size: 0.76rem; color: #9ca3af; text-transform: uppercase; }
-    .g-value { font-size: 1.65rem; font-weight: 800; color: var(--gold); margin: 0.3rem 0; font-family: monospace; }
-    canvas { width: 100%; height: 68px; display: block; margin-top: 0.4rem; }
-    .worm-box { margin: 1.2rem 0 2rem; background: #050811; border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 8px; padding: 1rem; font-family: monospace; font-size: 0.8rem; color: #fcd34d; overflow-x: auto; }
-    .audit-box { background: var(--panel); border: 2px solid var(--gold); border-radius: 14px; padding: 2rem; box-shadow: 0 0 30px rgba(245, 158, 11, 0.12); }
-    .price { font-size: 2.5rem; font-weight: 800; color: var(--gold); margin: 0.8rem 0; }
-    .price span { font-size: 1rem; color: #9ca3af; font-weight: 500; }
-    ul { padding-left: 1.3rem; color: #d1d5db; margin-bottom: 1.8rem; }
-    li { margin-bottom: 0.55rem; }
-    .btn { display: block; width: 100%; text-align: center; background: var(--gold); color: #000; padding: 1.05rem 0; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.05rem; box-sizing: border-box; }
-    .back-link { display: inline-block; margin-top: 1.6rem; color: var(--accent); text-decoration: none; font-weight: 700; }
-    .footer { margin-top: 2.8rem; padding-top: 1.4rem; border-top: 1px solid var(--border); font-size: 0.84rem; color: #6b7280; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard1979.com | Autoridad Auditora AAUFSA & Motor Fiscal Determinista IRC Cap. 56</title>
+    <style>
+        :root {
+            --bg-deep: #07060e;
+            --bg-panel: #13111c;
+            --bg-card: #1c192b;
+            --text-main: #f8fafc;
+            --text-muted: #a1a1aa;
+            --amber: #f59e0b;
+            --emerald: #10b981;
+            --indigo: #6366f1;
+            --cyan: #38bdf8;
+            --border: #2e2a44;
+            --mono: 'Courier New', Courier, monospace;
+            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--bg-deep); color: var(--text-main); font-family: var(--sans); line-height: 1.6; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+        header { background: rgba(19, 17, 28, 0.96); border-bottom: 1px solid var(--border); padding: 14px 0; position: sticky; top: 0; z-index: 1000; }
+        .nav-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .pill-top { background: var(--amber); color: #1e1b4b; font-family: var(--mono); font-size: 0.72rem; font-weight: 800; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 12px; }
+        .nav-links { display: flex; gap: 16px; font-family: var(--mono); font-size: 0.82rem; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; }
+        .nav-links a:hover { color: var(--amber); }
+        .hero { padding: 40px 0 32px; border-bottom: 1px solid var(--border); }
+        .hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 10px; }
+        .hero p { color: var(--text-muted); max-width: 900px; margin-bottom: 22px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
+        .card-header { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        .val-large { font-family: var(--mono); font-size: 1.75rem; font-weight: 800; }
+        .val-amber { color: var(--amber); }
+        .val-emerald { color: var(--emerald); }
+        .val-cyan { color: var(--cyan); }
+        .sub-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; font-family: var(--mono); }
+        .section { padding: 40px 0; border-bottom: 1px solid var(--border); }
+        .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+        .section-sub { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px; }
+        .btn { display: inline-block; padding: 11px 20px; border-radius: 6px; font-weight: 700; font-size: 0.88rem; text-decoration: none; text-align: center; cursor: pointer; border: 1px solid transparent; }
+        .btn-amber { background: var(--amber); color: #1e1b4b; }
+        .btn-indigo { background: var(--indigo); color: #fff; width: 100%; }
+        .btn-outline { background: transparent; border-color: var(--border); color: var(--text-main); font-family: var(--mono); }
+        .price-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .price-card.omni { border-color: var(--amber); }
+        .price-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+        .price-amount { font-size: 1.85rem; font-weight: 800; margin-bottom: 14px; font-family: var(--mono); }
+        .feature-list { list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
+        .feature-list li { margin-bottom: 8px; padding-left: 14px; position: relative; }
+        .feature-list li::before { content: "✓"; color: var(--amber); position: absolute; left: 0; font-weight: bold; }
+        .covenant-box { background: var(--bg-panel); border: 1px solid var(--border); border-left: 4px solid var(--amber); padding: 24px; border-radius: 6px; font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); margin-top: 16px; }
+        .covenant-box strong { color: #fff; }
+        .hash-box { background: #000; border: 1px solid var(--border); padding: 9px 12px; border-radius: 4px; font-family: var(--mono); font-size: 0.8rem; color: var(--amber); display: block; margin-top: 4px; word-break: break-all; }
+        footer { padding: 30px 0; font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <span class="badge">STANDARD1979.COM | DOMAIN ID: 282230018778 | WORM FORENSIC AUDIT &amp; GRAFANA</span>
-    <!-- STANDARD 1979 FORENSIC BRANDING -->
-<div id="standard1979-brand-box" style="display: flex; align-items: center; gap: 16px; margin-bottom: 22px; padding: 16px 20px; background: linear-gradient(135deg, #130e06 0%, #1c140a 50%, #0d131f 100%); border: 1px solid #3d2a10; border-left: 4px solid #f59e0b; border-radius: 12px; box-shadow: 0 10px 30px rgba(245, 158, 11, 0.12);">
-  <svg viewBox="0 0 120 120" width="70" height="70" style="flex-shrink: 0; filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.45));">
-    <defs>
-      <linearGradient id="stGold" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#fef08a"/>
-        <stop offset="50%" stop-color="#f59e0b"/>
-        <stop offset="100%" stop-color="#b45309"/>
-      </linearGradient>
-      <linearGradient id="stBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#93c5fd"/>
-        <stop offset="50%" stop-color="#2563eb"/>
-      </linearGradient>
-    </defs>
-    <path d="M60 14 L98 28 L98 64 C98 86 60 106 60 106 C60 106 22 86 22 64 L22 28 Z" fill="none" stroke="url(#stGold)" stroke-width="4"/>
-    <rect x="44" y="54" width="32" height="26" rx="4" fill="url(#stGold)"/>
-    <path d="M49 54 L49 42 C49 35 54 30 60 30 C66 30 71 35 71 42 L71 54" fill="none" stroke="url(#stGold)" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="60" cy="65" r="3.5" fill="#0f172a"/>
-    <path d="M60 68.5 L60 74" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="60" cy="20" r="3" fill="url(#stBlue)"/>
-    <circle cx="88" cy="32" r="3" fill="url(#stBlue)"/>
-    <circle cx="32" cy="32" r="3" fill="url(#stBlue)"/>
-  </svg>
-  <div>
-    <div style="display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;">
-      <span style="font-size: 26px; font-weight: 900; letter-spacing: 1.5px; background: linear-gradient(180deg, #ffffff 0%, #fef08a 60%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">STANDARD 1979</span>
-      <span style="font-size: 16px; font-weight: 800; color: #f59e0b; letter-spacing: 1px;">.COM</span>
-    </div>
-    <div style="font-size: 12px; color: #cbd5e1; font-family: monospace; margin-top: 4px;">
-      &#128274; FORENSIC CRYPTOGRAPHIC AUDITOR | DOMAIN ID: 282230018778 | ORG: 320717657398
-    </div>
-  </div>
-</div>
-<h1>Standard 1979 — Autoridad de Auditoría Criptográfica AAUFSA</h1>
-    <p class="subtitle">Monitoreo forense en tiempo real (Grafana Compliance Dashboard), verificación de inmutabilidad WORM (Write-Once-Read-Many) y certificación de recaptura Clawback bajo IRC Capítulo 56 (Sec. 5000F-5000H).</p>
 
-    <!-- PANEL GRAFANA FORENSE STANDARD 1979 -->
-    <div class="grafana-header">
-      <div style="font-weight:800; color:#fff; font-size:0.92rem;">GRAFANA FORENSIC AUDIT STREAM — DOMAIN 282230018778 (CLAWBACK &amp; FIDUCIARY SPLIT)</div>
-      <div style="font-size:0.76rem; color:#10b981; font-family:monospace;">SBOM CYCLONEDX: 0 FAILURES | WORM: VERIFIED</div>
+<header>
+    <div class="container nav-bar">
+        <div style="font-family: var(--mono); font-weight: 800; font-size: 1rem;">
+            STANDARD1979.COM <span style="color: var(--amber); font-size: 0.75rem; margin-left: 8px;">[100% AUTORIDAD AAUFSA & MOTOR FISCAL IRC CAP. 56 | DOMAIN ID: 282230018778]</span>
+        </div>
+        <nav class="nav-links">
+            <a href="#motor-aaufsa">Motor Fiscal IRC Cap. 56</a>
+            <a href="#licencias-aaufsa">Licencias & Dictamen Forense</a>
+            <a href="#inmunidad-5000h">Puerto Seguro Sec. 5000H(d)</a>
+            <a href="#contratos-worm">Contratos & Peritaje WORM</a>
+            <a href="/manifest.json" target="_blank">Manifiesto AAUFSA</a>
+        </nav>
     </div>
-    <div class="grafana-grid">
-      <div class="g-panel">
-        <div class="g-label">Gravamen Base + Clawback (15.30% + 2.00%)</div>
-        <div class="g-value">$18,727.20 USD</div>
-        <div style="font-size:0.75rem; color:#9ca3af;">Base: $18,360.00 | Recargo Sec. 5000G(c): $367.20</div>
-        <canvas id="chart-tax" width="280" height="68"></canvas>
-      </div>
-      <div class="g-panel">
-        <div class="g-label">Fondo Fiduciario OASI Seguro Social (75%)</div>
-        <div class="g-value" style="color:#10b981;">$14,045.40 USD</div>
-        <div style="font-size:0.75rem; color:#9ca3af;">1,404,540 Centavos (Aritmética Entera Exacta)</div>
-        <canvas id="chart-oasi" width="280" height="68"></canvas>
-      </div>
-      <div class="g-panel">
-        <div class="g-label">Fondo Recalificación Laboral (25%)</div>
-        <div class="g-value" style="color:#38bdf8;">$4,681.80 USD</div>
-        <div style="font-size:0.75rem; color:#9ca3af;">468,180 Centavos | 6/6 Vectores Aprobados</div>
-        <canvas id="chart-reskill" width="280" height="68"></canvas>
-      </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <span class="pill-top">STANDARD1979.COM | DOMAIN ID: 282230018778 | HOLDING ID: 320717657398</span>
+        <h1>Autoridad Auditora Forense WORM & Motor Fiscal Determinista AAUFSA (IRC Chapter 56)</h1>
+        <p>
+            Plataforma dedicada exclusivamente al cumplimiento estatutario <strong>AAUFSA</strong>, liquidación impositiva de punto fijo 
+            (<code>IRC Sec. 5000F</code>), dictámenes de vigilancia <code>Clawback Sec. 5000G(c)</code>, consolidación de grupos controlados 
+            (<code>IRC Sec. 414/1563</code>) y certificación de inmunidad <code>IRC Sec. 5000H(d)</code> bajo la autoría exclusiva de 
+            <strong>Jose Emanuel Guadalupe Lopez</strong> (<strong>guadalupelopezjose96-org</strong>).
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://buy.stripe.com/" class="btn btn-amber" target="_blank" rel="noopener noreferrer">Solicitar Dictamen Forense WORM & Licencias AAUFSA</a>
+            <a href="/manifest.json" class="btn btn-outline" target="_blank">Manifiesto Estatutario JSON</a>
+            <a href="/audit_chain.txt" class="btn btn-outline" target="_blank">Cadena Criptográfica SHA-256</a>
+            <button onclick="window.print()" class="btn btn-outline">Exportar Dictamen Oficial (PDF)</button>
+        </div>
+    </section>
+
+    <section id="motor-aaufsa" class="section">
+        <div class="section-title">1. Parámetros Estatutarios del Motor Fiscal Determinista (AAUFSA / IRC Cap. 56)</div>
+        <div class="section-sub">Cálculo aritmético entero de punto fijo (0% punto flotante) y bifurcación fiduciaria automatizada.</div>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-header">IRC SEC. 5000F BASE TAX</div>
+                <div class="val-large val-cyan">15.30% FIXED-POINT</div>
+                <div class="sub-text" style="color: var(--emerald);">Exención Cloud SaaS Sec. 5000H(d): ACTIVA (0% Retención Propia)</div>
+            </div>
+            <div class="card">
+                <div class="card-header">SEC. 5000G(c) CLAWBACK AUDIT</div>
+                <div class="val-large val-amber">+2.00% SURCHARGE</div>
+                <div class="sub-text">Vigilancia WORM (&lt;36 meses) & Exención PyME Sec. 5000G(b) (&le; $5M USD)</div>
+            </div>
+            <div class="card">
+                <div class="card-header">FIDUCIARY SPLIT (OASI / RESKILL)</div>
+                <div class="val-large val-emerald">75.00% / 25.00%</div>
+                <div class="sub-text">75% Fondo OASI Seguro Social | 25% Recalificación Laboral</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="licencias-aaufsa" class="section">
+        <div class="section-title">2. Licenciamiento Corporativo AAUFSA, Grupo Controlado & Certificación Forense</div>
+        <div class="section-sub">Instrumentos de cumplimiento fiscal, consolidación societaria y dictámenes periciales con sellado WORM.</div>
+
+        <div class="grid-3">
+            <div class="price-card">
+                <div>
+                    <div class="price-title">1. Certificación Forense WORM & Dictamen Clawback Sec. 5000G(c)</div>
+                    <div class="price-amount val-amber">$1,500.00 USD <span style="font-size: 0.8rem; color: var(--text-muted);">/ dictamen</span></div>
+                    <ul class="feature-list">
+                        <li>Certificación pericial firmada por Autoridad Standard 1979 (ID: 282230018778)</li>
+                        <li>Auditoría de ventana de 36 meses bajo IRC Sec. 5000G(c)</li>
+                        <li>Evaluación y acreditación de exención PyME Sec. 5000G(b) (&le; $5M USD)</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/" class="btn btn-amber" style="width: 100%;" target="_blank" rel="noopener noreferrer">Contratar Dictamen Forense — $1,500.00</a>
+            </div>
+
+            <div class="price-card">
+                <div>
+                    <div class="price-title">2. Licencia B2B Multi-Dominio — Cumplimiento Fiscal AAUFSA</div>
+                    <div class="price-amount val-cyan">$499.00 USD <span style="font-size: 0.85rem; color: var(--text-muted);">/ mes</span></div>
+                    <ul class="feature-list">
+                        <li>Aislamiento RLS completo para los 6 Dominios Corporativos</li>
+                        <li>Liquidación fiscal exacta 15.30% Sec. 5000F + Clawback 2.00%</li>
+                        <li>Bifurcación fiduciaria automatizada (75% OASI / 25% Recalificación)</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/" class="btn btn-indigo" target="_blank" rel="noopener noreferrer">Suscribir Multi-Dominio — $499.00 / mes</a>
+            </div>
+
+            <div class="price-card omni">
+                <div>
+                    <div class="price-title">3. Licencia Grupo Controlado (IRC Sec. 414 / 1563) — Omni</div>
+                    <div class="price-amount val-amber">$10,000.00 USD <span style="font-size: 0.8rem; color: var(--text-muted);">/ licencia</span></div>
+                    <ul class="feature-list">
+                        <li>Consolidación ilimitada de ingresos brutos societarios (IRC Sec. 414/1563)</li>
+                        <li>Cobertura integral de inmunidad de proveedor bajo IRC Sec. 5000H(d)</li>
+                        <li>Emisión prioritaria de acuerdos inmutables AGR-AAUFSA-5000H</li>
+                    </ul>
+                </div>
+                <a href="https://buy.stripe.com/" class="btn btn-amber" style="width: 100%;" target="_blank" rel="noopener noreferrer">Adquirir Licencia IRC 414/1563 — $10,000.00</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="inmunidad-5000h" class="section">
+        <div class="section-title">3. Cláusulas Estatutarias Obligatorias e Inmunidad de Proveedor SaaS (IRC Sec. 5000H(d))</div>
+        <div class="section-sub">Marco jurídico inalterable (Cláusula 3) ejecutado en cada contrato <code>AGR-AAUFSA-5000H</code>.</div>
+
+        <div class="covenant-box">
+            <p><strong>SAFE HARBOR STATUTE:</strong> IRC Sec. 5000H(d) — "Cloud Computing and Software-as-a-Service Provider Immunity"</p><br>
+            <p><strong>STATUTORY COVENANT (IRC CHAPTER 56):</strong> "The Licensee acknowledges and agrees that it acts solely as the Operator and User of the automated technology. Any workforce reallocations or potential tax liabilities arising under IRC Section 5000F reside exclusively with the Licensee. Licensor holds 0% liability under Sec. 5000H(d)."</p><br>
+            <p><strong>AAUFSA CLAUSE 3 IMMUTABILITY:</strong> "Strict adherence to Clause 3: 0% statutory text alteration."</p><br>
+            <p><strong>AUTOR EXCLUSIVO & ENTIDAD RECTORA:</strong> Jose Emanuel Guadalupe Lopez | Holding: <code>guadalupelopezjose96-org</code> (ID: <code>320717657398</code>) | Autoridad Auditora: <code>standard1979.com</code> (ID: <code>282230018778</code>).</p>
+        </div>
+    </section>
+
+    <section id="contratos-worm" class="section">
+        <div class="section-title">4. Custodia Pericial de Contratos AAUFSA & Reportes de Cumplimiento WORM</div>
+        <div class="section-sub">Sellos criptográficos <code>SHA-256</code> custodiados en modo de solo lectura (<code>chmod 400</code>) al 2026-11-01T02:16:14Z.</div>
+
+        <div class="card">
+            <div style="margin-bottom: 12px;">
+                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">1. ÚLTIMO CONTRATO ESTATUTARIO EJECUTADO (AGR-AAUFSA-5000H-20261031213748.json.sha256):</span>
+                <span class="hash-box">b9cbe79632f913b29afcc5a8dfbcb33361a1a47d38a3755916647e2c8f2599f4</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">2. REPORTE PERICIAL DE CUMPLIMIENTO (compliance_report_latest.sha256):</span>
+                <span class="hash-box">c245882afbb0198fe486f8677ff4ca681a62cd6b8f4b072c5cd597171f77ea21</span>
+            </div>
+            <div>
+                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">3. RESPALDO WORM AUDITADO DEL LIBRO MAYOR (11 ASIENTOS | $48,964.06 USD | &Delta;=0):</span>
+                <span class="hash-box">b275ea3fc7edcb428ec516a307891ee3df2f2a6c9186463b190c78e6e41725e6</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Autor Exclusivo (Cláusula 3): Jose Emanuel Guadalupe Lopez | Holding: guadalupelopezjose96-org (ID: 320717657398) | Autoridad AAUFSA: Standard1979.com (ID: 282230018778).</p>
     </div>
+</footer>
 
-    <div class="worm-box">
-      <strong style="color:#10b981;">[WORM FORENSIC MANIFEST — CRYPTOGRAPHIC_COMPLIANCE_MANIFEST.sha256]</strong><br>
-      6491ec0d16446cc7045cdb885a978f8ce28e5ecc5f51f8fe336c5a0b5a302558  AAUFSA_STATUTE_MASTER.md<br>
-      9b6cce58c1ee453dd038509f8a2c2c9f0455bae75bfd8d7f459909417dac5328  src/main.rs<br>
-      e256d54fa2762605d9e362f0a50245b617f7ed1310d00bae376671d82c5c49e5  deny.toml (POL-SEC-OSS-001 VERIFIED)
-    </div>
 
-    <div class="audit-box">
-      <h2 style="margin-top:0; color:#fff;">Certificación de Auditoría Criptográfica AAUFSA &amp; Dictamen Clawback (Sec. 5000G(c))</h2>
-      <div class="price">$1,500.00 USD <span>/ certificación oficial</span></div>
-      <ul>
-        <li><strong>Auditoría Estatutaria WORM de 6 Vectores:</strong> Verificación formal de ausencia de secretos, atribución Cláusula 3 y aislamiento RLS de los 6 dominios corporativos.</li>
-        <li><strong>Dictamen de Recaptura Clawback (Sec. 5000G(c)):</strong> Certificación en punto fijo del impuesto base (15.30% Sec. 5000F), recargo del 2.00% por ruptura de Safe Harbor (&lt; 36 meses) y bifurcación fiduciaria (75% OASI / 25% Recalificación).</li>
-        <li><strong>Gatekeeper Legal SBOM CycloneDX (POL-SEC-OSS-001):</strong> Escaneo de licencias con 24 pruebas aprobadas y cero contaminación Copyleft.</li>
-        <li><strong>Sello Criptográfico Inmutable:</strong> Emisión de manifiesto <code>SHA-256</code> y validación de cadena PostgreSQL <code>SERIALIZABLE</code>.</li>
-      </ul>
-      <a class="btn" href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener">Contratar Auditoría Oficial Standard 1979 — $1,500.00 USD</a>
-    </div>
+<!-- STANDARD1979 LIVE FORENSIC STREAMING ENGINE v10.4 (WORM RFC 3161 / IRC SEC. 5000F-5000H) -->
+<script id="standard1979-live-forensic-engine">
+(function(){
+  const polylines = Array.from(document.querySelectorAll('svg polyline'));
+  if (!polylines.length) return;
 
-    <a class="back-link" href="https://auraintelcore.com">&larr; Volver al Portal de Energía e Infraestructura AuraIntelCore.com (Domain ID: 188680247367)</a>
+  const basePts = polylines.map(el => (el.getAttribute('points') || '').trim().split(/\s+/).map(p => {
+    const parts = p.split(',');
+    return [parseFloat(parts[0]), parseFloat(parts[1])];
+  }).filter(p => !isNaN(p[0]) && !isNaN(p[1])));
 
-    <div class="footer">
-      Autor Exclusivo (Cláusula 3): Jose Emanuel Guadalupe Lopez | Organización ID: 320717657398 | Standard1979.com (Domain ID: 282230018778).
-    </div>
-  </div>
+  function stepForensicStream() {
+    const t = Date.now() / 850;
+    polylines.forEach((el, idx) => {
+      const pts = basePts[idx];
+      if (!pts || pts.length < 3) return;
+      const animated = pts.map((pt, i) => {
+        const dy = Math.round(4.0 * Math.sin(t + i * 0.65 + idx * 1.3));
+        const ny = Math.max(6, Math.min(44, pt[1] + dy));
+        return `${pt[0]},${ny}`;
+      }).join(' ');
+      el.setAttribute('points', animated);
+    });
+  }
 
-  <script>
-    function startAuditChart(canvasId, color, baseVal, variance) {
-      const canvas = document.getElementById(canvasId);
-      const ctx = canvas.getContext('2d');
-      const data = Array.from({length: 36}, () => baseVal + (Math.random() - 0.5) * variance);
-      function draw() {
-        data.shift();
-        data.push(baseVal + (Math.random() - 0.5) * variance);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2;
-        const min = baseVal - variance * 1.5;
-        const max = baseVal + variance * 1.5;
-        data.forEach((v, i) => {
-          const x = (i / (data.length - 1)) * canvas.width;
-          const y = canvas.height - ((v - min) / (max - min)) * (canvas.height - 12) - 6;
-          if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        });
-        ctx.stroke();
-      }
-      draw();
-      setInterval(draw, 1400);
-    }
-    startAuditChart('chart-tax', '#f59e0b', 1872720, 12000);
-    startAuditChart('chart-oasi', '#10b981', 1404540, 9000);
-    startAuditChart('chart-reskill', '#38bdf8', 468180, 3000);
-  </script>
-<!-- STRIPE_LIVE_B2B_CHECKOUT -->
-<section style="max-width:1150px;margin:32px auto;padding:24px;border:1px solid #10b981;border-radius:12px;background:#090d16;color:#f8fafc;font-family:monospace;">
-  <h2 style="color:#10b981;margin-top:0;">AuraIntelCore.com | Planta Virtual de Energía (VPP) y Microservicios OT/IT</h2>
-  <p style="color:#94a3b8;font-size:0.9rem;">Planes 100% mensuales escalados para cualquier empresa del mundo con Tax ID (EIN / VAT / RFC / CNPJ) e inmunidad IRC Sec. 5000H(d).</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:16px;">
-    <a href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" style="padding:16px;background:#1e293b;border:1px solid #334155;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;text-align:center;">
-      1. Startup &amp; PyME<br><span style="font-size:1.25rem;color:#38bdf8;">USD 299.00 / mes</span>
-    </a>
-    <a href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" style="padding:16px;background:#1e3a8a;border:1px solid #3b82f6;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;text-align:center;">
-      2. Mid-Market B2B<br><span style="font-size:1.25rem;color:#60a5fa;">USD 1,499.00 / mes</span>
-    </a>
-    <a href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" style="padding:16px;background:#065f46;border:1px solid #10b981;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;text-align:center;">
-      3. Enterprise 5000H<br><span style="font-size:1.25rem;color:#34d399;">USD 4,875.00 / mes</span>
-    </a>
-    <a href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" target="_blank" rel="noopener noreferrer" style="padding:16px;background:#0f766e;border:1px solid #14b8a6;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;text-align:center;">
-      4. Mayorista VPP / Holding<br><span style="font-size:1.25rem;color:#2dd4bf;">USD 29,250.00 / mes</span>
-    </a>
-  </div>
-</section>
-<!-- END_STRIPE_LIVE_B2B_CHECKOUT -->
-<!-- START_AURAINTELCORE_CROSSLINK -->
-<div style="margin:24px auto;max-width:1200px;padding:18px 24px;background:#0f172a;border:1px solid #10b981;border-radius:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-  <div>
-    <div style="font-size:0.8rem;color:#10b981;font-weight:bold;letter-spacing:0.05em;">ECOSISTEMA CORPORATIVO INTEGRADO | HOLDING ID: 320717657398</div>
-    <div style="font-size:1.05rem;color:#f8fafc;font-weight:bold;margin-top:4px;">AuraIntelCore.com — Orquestación Industrial VPP &amp; Telemetría Síncrona (Domain ID: 188680247367)</div>
-    <div style="font-size:0.85rem;color:#94a3b8;margin-top:2px;">Despacho eléctrico en tiempo real (Bus VPP #1), microservicios de 1.5 MW y licenciamiento SaaS B2B en Stripe Live.</div>
-  </div>
-  <a href="https://auraintelcore.com" target="_blank" rel="noopener noreferrer" style="padding:10px 18px;background:#10b981;color:#020617;text-decoration:none;border-radius:6px;font-weight:bold;font-size:0.9rem;white-space:nowrap;">
-    Ir a AuraIntelCore.com &rarr;
-  </a>
-</div>
-<!-- END_AURAINTELCORE_CROSSLINK -->
+  stepForensicStream();
+  setInterval(stepForensicStream, 1200);
+})();
+</script>
+
 </body>
 </html>

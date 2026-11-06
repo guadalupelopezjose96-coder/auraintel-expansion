@@ -1,240 +1,524 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Standard1979.com | Autoridad Auditora AAUFSA & Motor Fiscal Determinista IRC Cap. 56</title>
-    <style>
-        :root {
-            --bg-deep: #07060e;
-            --bg-panel: #13111c;
-            --bg-card: #1c192b;
-            --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
-            --amber: #f59e0b;
-            --emerald: #10b981;
-            --indigo: #6366f1;
-            --cyan: #38bdf8;
-            --border: #2e2a44;
-            --mono: 'Courier New', Courier, monospace;
-            --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: var(--bg-deep); color: var(--text-main); font-family: var(--sans); line-height: 1.6; }
-        .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
-        header { background: rgba(19, 17, 28, 0.96); border-bottom: 1px solid var(--border); padding: 14px 0; position: sticky; top: 0; z-index: 1000; }
-        .nav-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .pill-top { background: var(--amber); color: #1e1b4b; font-family: var(--mono); font-size: 0.72rem; font-weight: 800; padding: 4px 12px; border-radius: 99px; display: inline-block; margin-bottom: 12px; }
-        .nav-links { display: flex; gap: 16px; font-family: var(--mono); font-size: 0.82rem; flex-wrap: wrap; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; }
-        .nav-links a:hover { color: var(--amber); }
-        .hero { padding: 40px 0 32px; border-bottom: 1px solid var(--border); }
-        .hero h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 10px; }
-        .hero p { color: var(--text-muted); max-width: 900px; margin-bottom: 22px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px; }
-        .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 22px; }
-        .card-header { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
-        .val-large { font-family: var(--mono); font-size: 1.75rem; font-weight: 800; }
-        .val-amber { color: var(--amber); }
-        .val-emerald { color: var(--emerald); }
-        .val-cyan { color: var(--cyan); }
-        .sub-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; font-family: var(--mono); }
-        .section { padding: 40px 0; border-bottom: 1px solid var(--border); }
-        .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
-        .section-sub { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 22px; }
-        .btn { display: inline-block; padding: 11px 20px; border-radius: 6px; font-weight: 700; font-size: 0.88rem; text-decoration: none; text-align: center; cursor: pointer; border: 1px solid transparent; }
-        .btn-amber { background: var(--amber); color: #1e1b4b; }
-        .btn-indigo { background: var(--indigo); color: #fff; width: 100%; }
-        .btn-outline { background: transparent; border-color: var(--border); color: var(--text-main); font-family: var(--mono); }
-        .price-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
-        .price-card.omni { border-color: var(--amber); }
-        .price-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-        .price-amount { font-size: 1.85rem; font-weight: 800; margin-bottom: 14px; font-family: var(--mono); }
-        .feature-list { list-style: none; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px; }
-        .feature-list li { margin-bottom: 8px; padding-left: 14px; position: relative; }
-        .feature-list li::before { content: "✓"; color: var(--amber); position: absolute; left: 0; font-weight: bold; }
-        .covenant-box { background: var(--bg-panel); border: 1px solid var(--border); border-left: 4px solid var(--amber); padding: 24px; border-radius: 6px; font-family: var(--mono); font-size: 0.85rem; color: var(--text-muted); margin-top: 16px; }
-        .covenant-box strong { color: #fff; }
-        .hash-box { background: #000; border: 1px solid var(--border); padding: 9px 12px; border-radius: 4px; font-family: var(--mono); font-size: 0.8rem; color: var(--amber); display: block; margin-top: 4px; word-break: break-all; }
-        footer { padding: 30px 0; font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted); }
-    </style>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" sizes="512x512" href="/assets/brand/icon-512x512.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard 1979 Holdings, LLC | Sovereign IP Treasury, IRC § 482 & WORM Vault Terminal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --vault-bg: #050507;
+      --vault-panel: #0c0d12;
+      --vault-card: #11131a;
+      --bullion: #e5b84b;
+      --bullion-bright: #ffd978;
+      --ledger-green: #10b981;
+      --vault-border: #26231a;
+      --text-ivory: #f9f6f0;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--vault-bg);
+      color: var(--text-ivory);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(229, 184, 75, 0.13) 0%, transparent 65%),
+        linear-gradient(to right, rgba(229, 184, 75, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 184, 75, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px, 32px 32px;
+      overflow-x: hidden;
+    }
+
+    /* Barra Unificada de los 6 Portales */
+    .omni-bar {
+      background: #020203;
+      border-bottom: 1px solid var(--vault-border);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.55rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .omni-bar a {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      border: 1px solid #27272a;
+      margin-left: 0.3rem;
+    }
+
+    .omni-bar a.active {
+      background: var(--bullion);
+      color: #050507;
+      border-color: var(--bullion);
+      font-weight: 700;
+    }
+
+    .vault-container {
+      max-width: 1420px;
+      margin: 0 auto;
+      padding: 1.5rem 1.75rem 4rem;
+    }
+
+    /* Cabecera Ejecutiva de la Sociedad Holding */
+    .vault-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--vault-border);
+      padding-bottom: 1.1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .vault-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .crest {
+      width: 44px;
+      height: 44px;
+      border: 2px solid var(--bullion);
+      background: rgba(229, 184, 75, 0.1);
+      display: grid;
+      place-items: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      color: var(--bullion);
+      font-size: 1.05rem;
+    }
+
+    .vault-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-ivory);
+    }
+
+    /* Consola Superior de 2 Cabinas (Estilo ProPhonix / Bloomberg Treasury) */
+    .treasury-console {
+      display: grid;
+      grid-template-columns: 1.32fr 0.68fr;
+      gap: 1.4rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .merkle-box {
+      background: var(--vault-panel);
+      border: 1px solid rgba(229, 184, 75, 0.38);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 40px rgba(229, 184, 75, 0.07);
+    }
+
+    #royalty-canvas {
+      width: 100%;
+      height: 315px;
+      background: #07080c;
+      border: 1px solid #1f1d16;
+      display: block;
+    }
+
+    .finops-kpi-panel {
+      background: var(--vault-panel);
+      border: 1px solid var(--vault-border);
+      border-radius: 12px;
+      padding: 1.4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .gold-kpi {
+      background: #07080c;
+      border-left: 3px solid var(--bullion);
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .btn-bullion {
+      display: block;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bullion-bright), var(--bullion));
+      color: #050507;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 700;
+      font-size: 0.82rem;
+      padding: 0.85rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Tabla Institucional IRC § 482 */
+    .ledger-table-wrap {
+      background: var(--vault-panel);
+      border: 1px solid var(--vault-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      overflow-x: auto;
+    }
+
+    table.gold-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    table.gold-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--bullion);
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--vault-border);
+      text-transform: uppercase;
+    }
+
+    table.gold-table td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Cuadrícula de 4 Columnas para las Licencias Directas del Holding */
+    .holding-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .holding-card {
+      background: var(--vault-card);
+      border: 1px solid var(--vault-border);
+      border-top: 3px solid var(--bullion);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .holding-card.prime {
+      border-top-color: var(--ledger-green);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
+    }
+
+    .holding-price {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(1.6rem, 2.1vw, 1.95rem);
+      font-weight: 700;
+      color: var(--bullion-bright);
+      white-space: nowrap;
+      margin: 0.85rem 0;
+    }
+
+    .holding-price span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    @media (max-width: 1024px) {
+      .treasury-console { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <div class="container nav-bar">
-        <div style="font-family: var(--mono); font-weight: 800; font-size: 1rem;">
-            STANDARD1979.COM <span style="color: var(--amber); font-size: 0.75rem; margin-left: 8px;">[100% AUTORIDAD AAUFSA & MOTOR FISCAL IRC CAP. 56 | DOMAIN ID: 282230018778]</span>
-        </div>
-        <nav class="nav-links">
-            <a href="#motor-aaufsa">Motor Fiscal IRC Cap. 56</a>
-            <a href="#licencias-aaufsa">Licencias & Dictamen Forense</a>
-            <a href="#inmunidad-5000h">Puerto Seguro Sec. 5000H(d)</a>
-            <a href="#contratos-worm">Contratos & Peritaje WORM</a>
-            <a href="/manifest.json" target="_blank">Manifiesto AAUFSA</a>
-        </nav>
+  <div class="omni-bar">
+    <div>
+      <strong>STANDARD 1979 HOLDINGS, LLC</strong> • FLA. STAT. CH. 605 • SOVEREIGN IP & IRC § 482 TREASURY TERMINAL
     </div>
-</header>
-
-<main class="container">
-    <section class="hero">
-        <span class="pill-top">STANDARD1979.COM | DOMAIN ID: 282230018778 | HOLDING ID: 320717657398</span>
-        <h1>Autoridad Auditora Forense WORM & Motor Fiscal Determinista AAUFSA (IRC Chapter 56)</h1>
-        <p>
-            Plataforma dedicada exclusivamente al cumplimiento estatutario <strong>AAUFSA</strong>, liquidación impositiva de punto fijo 
-            (<code>IRC Sec. 5000F</code>), dictámenes de vigilancia <code>Clawback Sec. 5000G(c)</code>, consolidación de grupos controlados 
-            (<code>IRC Sec. 414/1563</code>) y certificación de inmunidad <code>IRC Sec. 5000H(d)</code> bajo la autoría exclusiva de 
-            <strong>Jose Emanuel Guadalupe Lopez</strong> (<strong>guadalupelopezjose96-org</strong>).
-        </p>
-        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="https://buy.stripe.com/" class="btn btn-amber" target="_blank" rel="noopener noreferrer">Solicitar Dictamen Forense WORM & Licencias AAUFSA</a>
-            <a href="/manifest.json" class="btn btn-outline" target="_blank">Manifiesto Estatutario JSON</a>
-            <a href="/audit_chain.txt" class="btn btn-outline" target="_blank">Cadena Criptográfica SHA-256</a>
-            <button onclick="window.print()" class="btn btn-outline">Exportar Dictamen Oficial (PDF)</button>
-        </div>
-    </section>
-
-    <section id="motor-aaufsa" class="section">
-        <div class="section-title">1. Parámetros Estatutarios del Motor Fiscal Determinista (AAUFSA / IRC Cap. 56)</div>
-        <div class="section-sub">Cálculo aritmético entero de punto fijo (0% punto flotante) y bifurcación fiduciaria automatizada.</div>
-
-        <div class="grid-3">
-            <div class="card">
-                <div class="card-header">IRC SEC. 5000F BASE TAX</div>
-                <div class="val-large val-cyan">15.30% FIXED-POINT</div>
-                <div class="sub-text" style="color: var(--emerald);">Exención Cloud SaaS Sec. 5000H(d): ACTIVA (0% Retención Propia)</div>
-            </div>
-            <div class="card">
-                <div class="card-header">SEC. 5000G(c) CLAWBACK AUDIT</div>
-                <div class="val-large val-amber">+2.00% SURCHARGE</div>
-                <div class="sub-text">Vigilancia WORM (&lt;36 meses) & Exención PyME Sec. 5000G(b) (&le; $5M USD)</div>
-            </div>
-            <div class="card">
-                <div class="card-header">FIDUCIARY SPLIT (OASI / RESKILL)</div>
-                <div class="val-large val-emerald">75.00% / 25.00%</div>
-                <div class="sub-text">75% Fondo OASI Seguro Social | 25% Recalificación Laboral</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="licencias-aaufsa" class="section">
-        <div class="section-title">2. Licenciamiento Corporativo AAUFSA, Grupo Controlado & Certificación Forense</div>
-        <div class="section-sub">Instrumentos de cumplimiento fiscal, consolidación societaria y dictámenes periciales con sellado WORM.</div>
-
-        <div class="grid-3">
-            <div class="price-card">
-                <div>
-                    <div class="price-title">1. Certificación Forense WORM & Dictamen Clawback Sec. 5000G(c)</div>
-                    <div class="price-amount val-amber">$1,500.00 USD <span style="font-size: 0.8rem; color: var(--text-muted);">/ dictamen</span></div>
-                    <ul class="feature-list">
-                        <li>Certificación pericial firmada por Autoridad Standard 1979 (ID: 282230018778)</li>
-                        <li>Auditoría de ventana de 36 meses bajo IRC Sec. 5000G(c)</li>
-                        <li>Evaluación y acreditación de exención PyME Sec. 5000G(b) (&le; $5M USD)</li>
-                    </ul>
-                </div>
-                <a href="https://buy.stripe.com/" class="btn btn-amber" style="width: 100%;" target="_blank" rel="noopener noreferrer">Contratar Dictamen Forense — $1,500.00</a>
-            </div>
-
-            <div class="price-card">
-                <div>
-                    <div class="price-title">2. Licencia B2B Multi-Dominio — Cumplimiento Fiscal AAUFSA</div>
-                    <div class="price-amount val-cyan">$499.00 USD <span style="font-size: 0.85rem; color: var(--text-muted);">/ mes</span></div>
-                    <ul class="feature-list">
-                        <li>Aislamiento RLS completo para los 6 Dominios Corporativos</li>
-                        <li>Liquidación fiscal exacta 15.30% Sec. 5000F + Clawback 2.00%</li>
-                        <li>Bifurcación fiduciaria automatizada (75% OASI / 25% Recalificación)</li>
-                    </ul>
-                </div>
-                <a href="https://buy.stripe.com/" class="btn btn-indigo" target="_blank" rel="noopener noreferrer">Suscribir Multi-Dominio — $499.00 / mes</a>
-            </div>
-
-            <div class="price-card omni">
-                <div>
-                    <div class="price-title">3. Licencia Grupo Controlado (IRC Sec. 414 / 1563) — Omni</div>
-                    <div class="price-amount val-amber">$10,000.00 USD <span style="font-size: 0.8rem; color: var(--text-muted);">/ licencia</span></div>
-                    <ul class="feature-list">
-                        <li>Consolidación ilimitada de ingresos brutos societarios (IRC Sec. 414/1563)</li>
-                        <li>Cobertura integral de inmunidad de proveedor bajo IRC Sec. 5000H(d)</li>
-                        <li>Emisión prioritaria de acuerdos inmutables AGR-AAUFSA-5000H</li>
-                    </ul>
-                </div>
-                <a href="https://buy.stripe.com/" class="btn btn-amber" style="width: 100%;" target="_blank" rel="noopener noreferrer">Adquirir Licencia IRC 414/1563 — $10,000.00</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="inmunidad-5000h" class="section">
-        <div class="section-title">3. Cláusulas Estatutarias Obligatorias e Inmunidad de Proveedor SaaS (IRC Sec. 5000H(d))</div>
-        <div class="section-sub">Marco jurídico inalterable (Cláusula 3) ejecutado en cada contrato <code>AGR-AAUFSA-5000H</code>.</div>
-
-        <div class="covenant-box">
-            <p><strong>SAFE HARBOR STATUTE:</strong> IRC Sec. 5000H(d) — "Cloud Computing and Software-as-a-Service Provider Immunity"</p><br>
-            <p><strong>STATUTORY COVENANT (IRC CHAPTER 56):</strong> "The Licensee acknowledges and agrees that it acts solely as the Operator and User of the automated technology. Any workforce reallocations or potential tax liabilities arising under IRC Section 5000F reside exclusively with the Licensee. Licensor holds 0% liability under Sec. 5000H(d)."</p><br>
-            <p><strong>AAUFSA CLAUSE 3 IMMUTABILITY:</strong> "Strict adherence to Clause 3: 0% statutory text alteration."</p><br>
-            <p><strong>AUTOR EXCLUSIVO & ENTIDAD RECTORA:</strong> Jose Emanuel Guadalupe Lopez | Holding: <code>guadalupelopezjose96-org</code> (ID: <code>320717657398</code>) | Autoridad Auditora: <code>standard1979.com</code> (ID: <code>282230018778</code>).</p>
-        </div>
-    </section>
-
-    <section id="contratos-worm" class="section">
-        <div class="section-title">4. Custodia Pericial de Contratos AAUFSA & Reportes de Cumplimiento WORM</div>
-        <div class="section-sub">Sellos criptográficos <code>SHA-256</code> custodiados en modo de solo lectura (<code>chmod 400</code>) al 2026-11-01T02:16:14Z.</div>
-
-        <div class="card">
-            <div style="margin-bottom: 12px;">
-                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">1. ÚLTIMO CONTRATO ESTATUTARIO EJECUTADO (AGR-AAUFSA-5000H-20261031213748.json.sha256):</span>
-                <span class="hash-box">b9cbe79632f913b29afcc5a8dfbcb33361a1a47d38a3755916647e2c8f2599f4</span>
-            </div>
-            <div style="margin-bottom: 12px;">
-                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">2. REPORTE PERICIAL DE CUMPLIMIENTO (compliance_report_latest.sha256):</span>
-                <span class="hash-box">c245882afbb0198fe486f8677ff4ca681a62cd6b8f4b072c5cd597171f77ea21</span>
-            </div>
-            <div>
-                <span style="font-family: var(--mono); font-size: 0.78rem; color: var(--text-muted);">3. RESPALDO WORM AUDITADO DEL LIBRO MAYOR (11 ASIENTOS | $48,964.06 USD | &Delta;=0):</span>
-                <span class="hash-box">b275ea3fc7edcb428ec516a307891ee3df2f2a6c9186463b190c78e6e41725e6</span>
-            </div>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <div class="container">
-        <p>Autor Exclusivo (Cláusula 3): Jose Emanuel Guadalupe Lopez | Holding: guadalupelopezjose96-org (ID: 320717657398) | Autoridad AAUFSA: Standard1979.com (ID: 282230018778).</p>
+    <div>
+      <a href="https://standard1979.com" class="active">8091: Standard1979</a>
+      <a href="https://auraintelcore.com">8090: AuraIntelCore</a>
+      <a href="https://auratetrax.com">8092: AuraTetrax</a>
+      <a href="https://auraintelstudios3d.com">8093: Studios3D</a>
+      <a href="https://fourphonix.com">8094: FourPhonix</a>
+      <a href="https://prophonix.com">8095: ProPhonix</a>
     </div>
-</footer>
+  </div>
 
+  <div class="vault-container">
+    <header class="vault-header">
+      <div class="vault-brand">
+        <div class="crest">S79</div>
+        <div>
+          <div class="vault-title">STANDARD 1979 HOLDINGS, LLC</div>
+          <div style="font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--bullion);">
+            PARENT IP HOLDING ENTITY • STRIPE SETTLEMENT: acct_1UYSNeAMVKJK8xcd • MANAGING MEMBER: JOSÉ EMANUEL GUADALUPE LÓPEZ
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--ledger-green);">
+        ● WORM SHA-256 VAULT v1.2: VERIFIED (36/36 SKUs ACTIVE)
+      </div>
+    </header>
 
-<!-- STANDARD1979 LIVE FORENSIC STREAMING ENGINE v10.4 (WORM RFC 3161 / IRC SEC. 5000F-5000H) -->
-<script id="standard1979-live-forensic-engine">
-(function(){
-  const polylines = Array.from(document.querySelectorAll('svg polyline'));
-  if (!polylines.length) return;
+    <!-- Consola de Tesorería e Integridad Criptográfica en Vivo -->
+    <section class="treasury-console">
+      <div class="merkle-box">
+        <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:0.74rem; color:var(--bullion); margin-bottom:0.65rem;">
+          <span>FLUJO INTERCOMPAÑÍA EN TIEMPO REAL (IRC § 482 ARM'S LENGTH ROYALTY STREAM)</span>
+          <span style="color:var(--ledger-green);">HMAC-SHA256 ACTIVE</span>
+        </div>
+        <canvas id="royalty-canvas"></canvas>
+        <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono', monospace; font-size:0.71rem; color:var(--text-muted); margin-top:0.65rem;">
+          <span>SHA-256 BÓVEDA: <code>c15373eb2c884b6a68ef565f7cbe471a713979684ae927f83c007748ec6e760b</code></span>
+          <span>17 U.S.C. § 201 TITLE: 100% HOLDING</span>
+        </div>
+      </div>
 
-  const basePts = polylines.map(el => (el.getAttribute('points') || '').trim().split(/\s+/).map(p => {
-    const parts = p.split(',');
-    return [parseFloat(parts[0]), parseFloat(parts[1])];
-  }).filter(p => !isNaN(p[0]) && !isNaN(p[1])));
+      <div class="finops-kpi-panel">
+        <div>
+          <div style="font-size:0.78rem; color:var(--bullion); font-weight:700; margin-bottom:0.75rem;">
+            // CONSOLIDADO PATRIMONIAL & FLUJO DE CAJA (36 SKUs)
+          </div>
+          <div class="gold-kpi">
+            <div style="font-size:0.7rem; color:var(--text-muted);">CARTERA UNITARIA TOTAL AUDITADA EN STRIPE:</div>
+            <div style="font-size:1.45rem; font-weight:700; color:var(--bullion-bright);">$117,846.98 USD</div>
+          </div>
+          <div class="gold-kpi" style="border-left-color:var(--ledger-green);">
+            <div style="font-size:0.7rem; color:var(--text-muted);">REGALÍAS IA / VPP / 3D (15% IRC § 482):</div>
+            <div style="font-size:1.15rem; font-weight:700; color:var(--ledger-green);">+$12,525.30 USD / ciclo</div>
+          </div>
+          <div class="gold-kpi" style="border-left-color:#38bdf8;">
+            <div style="font-size:0.7rem; color:var(--text-muted);">REGALÍAS TELECOM & CARRIER (10% IRC § 482):</div>
+            <div style="font-size:1.15rem; font-weight:700; color:#38bdf8;">+$1,034.50 USD / ciclo</div>
+          </div>
+          <div class="gold-kpi">
+            <div style="font-size:0.7rem; color:var(--text-muted);">LICENCIAS DIRECTAS MATRIZ (100% HOLDING):</div>
+            <div style="font-size:1.15rem; font-weight:700; color:var(--text-ivory);">+$24,000.00 USD / ciclo</div>
+          </div>
+        </div>
+        <a href="#holding-skus" class="btn-bullion">Suscribir Licencias Directas del Holding ↓</a>
+      </div>
+    </section>
 
-  function stepForensicStream() {
-    const t = Date.now() / 850;
-    polylines.forEach((el, idx) => {
-      const pts = basePts[idx];
-      if (!pts || pts.length < 3) return;
-      const animated = pts.map((pt, i) => {
-        const dy = Math.round(4.0 * Math.sin(t + i * 0.65 + idx * 1.3));
-        const ny = Math.max(6, Math.min(44, pt[1] + dy));
-        return `${pt[0]},${ny}`;
-      }).join(' ');
-      el.setAttribute('points', animated);
-    });
-  }
+    <!-- Matriz Contable de las 6 Divisiones -->
+    <section class="ledger-table-wrap">
+      <div style="font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--bullion); margin-bottom:0.8rem;">
+        // ANEXO CONTABLE IRC § 482 — SEPARACIÓN DE ACTIVOS INTANGIBLES Y NEXO FISCAL FLORIDA
+      </div>
+      <table class="gold-table">
+        <thead>
+          <tr>
+            <th>Dominio / Unidad Operativa</th>
+            <th>Rol Corporativo</th>
+            <th>Código Stripe Tax</th>
+            <th>Estatuto Fiscal Florida</th>
+            <th>Tasa Regalía IRC § 482</th>
+            <th>Puerto Local</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>standard1979.com</strong></td>
+            <td>Sociedad Holding Matriz (100% IP)</td>
+            <td>txcd_10000000 / 10103001</td>
+            <td>Exento — Licencia Intangible</td>
+            <td style="color:var(--bullion-bright);">100.0% (Directo)</td>
+            <td><a href="https://standard1979.com" style="color:var(--bullion);">:8091</a></td>
+          </tr>
+          <tr>
+            <td><strong>AuraIntelCore.com</strong></td>
+            <td>OIDC vLLM Gateway & VPP +25,000 mW</td>
+            <td>txcd_10103001</td>
+            <td>R. 12A-1.032 (SaaS Exempt)</td>
+            <td style="color:var(--ledger-green);">15.0% Bruto</td>
+            <td><a href="https://auraintelcore.com" style="color:var(--bullion);">:8090</a></td>
+          </tr>
+          <tr>
+            <td><strong>AuraTetrax.com</strong></td>
+            <td>Agentic PaaS, eBPF & VPP 1.5 MW</td>
+            <td>txcd_10103001</td>
+            <td>R. 12A-1.032 (SaaS Exempt)</td>
+            <td style="color:var(--ledger-green);">15.0% Bruto</td>
+            <td><a href="https://auratetrax.com" style="color:var(--bullion);">:8092</a></td>
+          </tr>
+          <tr>
+            <td><strong>AuraIntelStudios3D.com</strong></td>
+            <td>NVIDIA H100 3D & C2PA v2.1 Notary</td>
+            <td>txcd_10103001 / 10501000</td>
+            <td>R. 12A-1.032 (Digital Exempt)</td>
+            <td style="color:var(--ledger-green);">15.0% Bruto</td>
+            <td><a href="https://auraintelstudios3d.com" style="color:var(--bullion);">:8093</a></td>
+          </tr>
+          <tr>
+            <td><strong>fourphonix.com</strong></td>
+            <td>Enterprise Cloud PBX, E911 & AI Voice</td>
+            <td>txcd_20030000</td>
+            <td>Fla. Stat. Ch. 202 (CST)</td>
+            <td style="color:#38bdf8;">10.0% Bruto</td>
+            <td><a href="https://fourphonix.com" style="color:var(--bullion);">:8094</a></td>
+          </tr>
+          <tr>
+            <td><strong>prophonix.com</strong></td>
+            <td>Wholesale Carrier SIP & BGP Anycast</td>
+            <td>txcd_20030000 / 10103001</td>
+            <td>Wholesale Carrier / Ch. 202</td>
+            <td style="color:#38bdf8;">10.0% Bruto</td>
+            <td><a href="https://prophonix.com" style="color:var(--bullion);">:8095</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-  stepForensicStream();
-  setInterval(stepForensicStream, 1200);
-})();
-</script>
+    <!-- Los 4 Instrumentos Directos del Holding en Stripe -->
+    <section id="holding-skus">
+      <h2 style="font-family:'Cinzel', serif; font-size:1.65rem; margin-bottom:1.2rem;">
+        Instrumentos Contractuales Directos de Standard 1979 Holdings, LLC (4 SKUs en Stripe)
+      </h2>
 
+      <div class="holding-grid">
+        <div class="holding-card">
+          <div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--bullion);">SKU: S1979-AAUFSA-QTR • txcd_10103001</div>
+            <h3 style="margin-top:0.35rem;">Standard 1979 — Auditoría Criptográfica AAUFSA & Clawback (Sec. 5000G(c))</h3>
+            <div class="holding-price">$1,500.00 <span>USD / cada 3 meses</span></div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Auditoría forense trimestral de cadena de custodia SHA-256, validación SQLCipher/Secure Enclave y cumplimiento estatutario.
+            </p>
+          </div>
+          <a href="https://buy.stripe.com/7sYdR991E9io3Mb8n8cjS1n" target="_blank" rel="noopener noreferrer" class="btn-bullion" style="margin-top:1.2rem;">Suscribir Auditoría</a>
+        </div>
+
+        <div class="holding-card prime">
+          <div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ledger-green);">SKU: S1979-IP-LIC • txcd_10000000</div>
+            <h3 style="margin-top:0.35rem;">Standard 1979 Master IP & Compliance License (S1979-IP-LIC)</h3>
+            <div class="holding-price" style="color:var(--ledger-green);">$2,500.00 <span>USD / mes</span></div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Licencia maestra sobre la propiedad intelectual del Holding con respaldo de precios de transferencia IRC § 482 y manifiesto SBOM.
+            </p>
+          </div>
+          <a href="https://buy.stripe.com/6oUeVdelYgKQgyX6f0cjS11" target="_blank" rel="noopener noreferrer" class="btn-bullion" style="background:var(--ledger-green); margin-top:1.2rem;">Activar Master IP License</a>
+        </div>
+
+        <div class="holding-card">
+          <div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--bullion);">SKU: OMNI-IRC414-MO • txcd_10103001</div>
+            <h3 style="margin-top:0.35rem;">AuraIntel Omni — Licencia Corporativa Grupo Controlado (Mensual)</h3>
+            <div class="holding-price">$10,000.00 <span>USD / mes</span></div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Cobertura corporativa multi-entidad para Grupos Controlados bajo IRC Sec. 414/1563 con facturación mensual recurrente.
+            </p>
+          </div>
+          <a href="https://buy.stripe.com/fZuaEX2Dg8ek4QfavgcjS1o" target="_blank" rel="noopener noreferrer" class="btn-bullion" style="margin-top:1.2rem;">Contratar Omni Mensual</a>
+        </div>
+
+        <div class="holding-card">
+          <div>
+            <div style="font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--bullion);">SKU: OMNI-IRC414-YR • txcd_10103001</div>
+            <h3 style="margin-top:0.35rem;">AuraIntel Omni — Licencia Grupo Controlado (IRC 414/1563 Anual)</h3>
+            <div class="holding-price">$10,000.00 <span>USD / año</span></div>
+            <p style="font-size:0.85rem; color:var(--text-muted);">
+              Modalidad CAPEX Anual para Grupos Controlados (IRC 414/1563) asentada directamente en el libro mayor WORM del Holding.
+            </p>
+          </div>
+          <a href="https://buy.stripe.com/9B6aEXelYeCI4QfeLwcjS1j" target="_blank" rel="noopener noreferrer" class="btn-bullion" style="margin-top:1.2rem;">Contratar Omni Anual</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Visualizador en Vivo de Liquidación de Regalías IRC § 482 desde las 5 Divisiones hacia la Bóveda Holding
+    const rc = document.getElementById('royalty-canvas');
+    const rctx = rc.getContext('2d');
+    let rw, rh, rtick = 0;
+
+    function resizeVault() {
+      rw = rc.width = rc.clientWidth;
+      rh = rc.height = rc.clientHeight;
+    }
+    window.addEventListener('resize', resizeVault);
+    resizeVault();
+
+    const subsidiaries = [
+      { name: "AURAINTELCORE (15%)", x: 0.16, y: 0.20, color: "#00f0ff" },
+      { name: "AURATETRAX (15%)", x: 0.16, y: 0.40, color: "#00ff9d" },
+      { name: "STUDIOS3D (15%)", x: 0.16, y: 0.60, color: "#ff2a85" },
+      { name: "FOURPHONIX (10%)", x: 0.16, y: 0.80, color: "#38bdf8" },
+      { name: "PROPHONIX (10%)", x: 0.44, y: 0.84, color: "#ffab00" }
+    ];
+
+    function drawRoyaltyStream() {
+      rctx.fillStyle = '#07080c';
+      rctx.fillRect(0, 0, rw, rh);
+
+      const hub = { x: rw * 0.78, y: rh * 0.48 };
+
+      subsidiaries.forEach((s, i) => {
+        const sx = s.x * rw, sy = s.y * rh;
+
+        rctx.beginPath();
+        rctx.moveTo(sx, sy);
+        rctx.quadraticCurveTo((sx + hub.x) / 2, sy - 20, hub.x, hub.y);
+        rctx.strokeStyle = 'rgba(229, 184, 75, 0.25)';
+        rctx.lineWidth = 1.4;
+        rctx.stroke();
+
+        // Flujo de pago viajando hacia la cuenta matriz acct_1UYSNeAMVKJK8xcd
+        const t = ((rtick * 0.011) + i * 0.19) % 1;
+        const px = (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * ((sx + hub.x) / 2) + t * t * hub.x;
+        const py = (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * (sy - 20) + t * t * hub.y;
+
+        rctx.beginPath();
+        rctx.arc(px, py, 3.5, 0, Math.PI * 2);
+        rctx.fillStyle = '#ffd978';
+        rctx.fill();
+
+        rctx.beginPath();
+        rctx.arc(sx, sy, 5.5, 0, Math.PI * 2);
+        rctx.fillStyle = s.color;
+        rctx.fill();
+
+        rctx.fillStyle = '#f9f6f0';
+        rctx.font = '11px IBM Plex Mono';
+        rctx.fillText(s.name, sx + 10, sy + 4);
+      });
+
+      // Nodo Bóveda Central Standard 1979 Holdings, LLC
+      rctx.beginPath();
+      rctx.arc(hub.x, hub.y, 28, 0, Math.PI * 2);
+      rctx.fillStyle = '#14120c';
+      rctx.fill();
+      rctx.lineWidth = 2.5;
+      rctx.strokeStyle = '#e5b84b';
+      rctx.stroke();
+
+      rctx.fillStyle = '#ffd978';
+      rctx.font = 'bold 11px IBM Plex Mono';
+      rctx.fillText('S1979 VAULT', hub.x - 36, hub.y - 36);
+      rctx.fillText('acct_1UYSNe...', hub.x - 42, hub.y + 44);
+
+      rtick++;
+      requestAnimationFrame(drawRoyaltyStream);
+    }
+    drawRoyaltyStream();
+  </script>
 </body>
 </html>
